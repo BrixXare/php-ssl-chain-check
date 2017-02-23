@@ -16,6 +16,6 @@
 		"phpseclib/phpseclib": "^2.0.4"
 	},
 	"require-dev" : {
-		"phpunit/phpunit" : ">5.0"
+		"phpunit/phpunit" : "^6.0"
 	}
 }
