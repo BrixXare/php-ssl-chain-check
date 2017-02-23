@@ -47,4 +47,19 @@ class SSLChainCheckValidateTest extends PHPUnit_Framework_TestCase
 		$sslChainCheck = new SSLChainCheck();
 		$sslChainCheck->check($cert);
 	}
+	function testValidSelfSigned(){
+		$cert = file_get_contents(__DIR__.'/../certs/valid_self_signed.pem');
+		$sslChainCheck = new SSLChainCheck();
+		$this->assertEquals(trim($cert),trim($sslChainCheck->check($cert)));
+	}
+	function testValidSelfSignedNl1(){
+		$cert = file_get_contents(__DIR__.'/../certs/valid_self_signed.pem')."\r\n\n\r\n";
+		$sslChainCheck = new SSLChainCheck();
+		$this->assertEquals(trim($cert),trim($sslChainCheck->check($cert)));
+	}
+	function testValidSelfSignedNl2(){
+		$cert = "\r\n\n\r\n".file_get_contents(__DIR__.'/../certs/valid_self_signed.pem');
+		$sslChainCheck = new SSLChainCheck();
+		$this->assertEquals(trim($cert),trim($sslChainCheck->check($cert)));
+	}
 }

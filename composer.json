@@ -12,11 +12,10 @@
 	"require" : {
 		"php" : ">=5.4",
 		"guzzlehttp/guzzle" : ">6.0",
-		"splitice/radical-ssl": "dev-master",
+		"splitice/radical-ssl": ">=1.0",
 		"phpseclib/phpseclib": "^2.0.4"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : ">5.0"
-	},
-	"minimum-stability" : "dev"
+	}
 }
