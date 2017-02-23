@@ -1,0 +1,22 @@
+{
+	"keywords" : [
+		"ssl"
+	],
+	"autoload" : {
+		"psr-0" : {
+			"Splitice" : "src"
+		}
+	},
+	"name" : "splitice/ssl-chain-check",
+	"type" : "library",
+	"require" : {
+		"php" : ">=5.4",
+		"guzzlehttp/guzzle" : ">6.0",
+		"splitice/radical-ssl": "dev-master",
+		"phpseclib/phpseclib": "^2.0.4"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : ">5.0"
+	},
+	"minimum-stability" : "dev"
+}
