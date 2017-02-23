@@ -62,4 +62,11 @@ class SSLChainCheckValidateTest extends PHPUnit_Framework_TestCase
 		$sslChainCheck = new SSLChainCheck();
 		$this->assertEquals(trim($cert),trim($sslChainCheck->check($cert)));
 	}
+	function testNoChain(){
+		$cert = file_get_contents(__DIR__.'/../certs/test_cert_nochain.pem');
+		$sslChainCheck = new SSLChainCheck();
+		$result = trim($sslChainCheck->check($cert));
+		$expected = trim(file_get_contents(__DIR__.'/../certs/test_cert_chain.pem'));
+		$this->assertEquals(str_replace("\r",'',$expected), str_replace("\r",'',$result));
+	}
 }

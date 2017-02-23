@@ -28,7 +28,7 @@ class SSLChainCheck
 	}
 
 	function check($data){
-		if(!preg_match('`-----END CERTIFICATE-----\r*\n*$`',$data) || !preg_match('`^\r*\n*-----BEGIN CERTIFICATE-----`', $data)){
+		if(!preg_match('`-----END CERTIFICATE-----[\r\n]*$`',$data) || !preg_match('`^[\r\n]*-----BEGIN CERTIFICATE-----`', $data)){
 			throw new \Exception('Certificate has invalid format');
 		}
 
@@ -124,7 +124,11 @@ class SSLChainCheck
 					throw new \Exception('Tried to fix certificate chain but could not download certifcate at ' . $cert->getParentCertificateURL());
 				}
 
-				$certificate = new X509Certificate((string)$httpResponse->getBody(), $x509);
+				$body = (string)$httpResponse->getBody();
+				if(strpos($body, '-----BEGIN CERTIFICATE-----') === false){
+					$body = "-----BEGIN CERTIFICATE-----\n".chunk_split(base64_encode($body), 64)."-----END CERTIFICATE-----";
+				}
+				$certificate = new X509Certificate($body, $x509);
 				$this->array_insert($certs, $k1 + 1, $certificate);
 				$k1 += 2;//this will scan this one again, but whatever
 				unset($seen_subjects[$subject_id]);//Just to be safe
