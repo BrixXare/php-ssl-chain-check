@@ -2,7 +2,7 @@
 
 use Splitice\SSLChainCheck;
 
-class SSLChainCheckValidateTest extends PHPUnit_Framework_TestCase
+class SSLChainCheckValidateTest extends \PHPUnit\Framework\TestCase
 {
 	function testAlphaNum()
 	{
@@ -47,6 +47,12 @@ class SSLChainCheckValidateTest extends PHPUnit_Framework_TestCase
 		$sslChainCheck = new SSLChainCheck();
 		$sslChainCheck->check($cert);
 	}
+    function testDoubleBegin(){
+        $this->expectException(\Exception::class);
+        $cert = "-----BEGIN CERTIFICATE-----\r\n".file_get_contents(__DIR__.'/../certs/test_cert_nochain.pem');
+        $sslChainCheck = new SSLChainCheck();
+        $sslChainCheck->check($cert);
+    }
 	function testValidSelfSigned(){
 		$cert = file_get_contents(__DIR__.'/../certs/valid_self_signed.pem');
 		$sslChainCheck = new SSLChainCheck();

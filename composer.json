@@ -10,7 +10,7 @@
 	"name" : "splitice/ssl-chain-check",
 	"type" : "library",
 	"require" : {
-		"php" : ">=5.4",
+		"php" : ">=5.5",
 		"guzzlehttp/guzzle" : ">6.0",
 		"splitice/radical-ssl": ">=1.0",
 		"phpseclib/phpseclib": "^2.0.4"
